@@ -1,3 +1,6 @@
+v1.0.1
+- use sys.listitem for all info
+
 v1.0.0
 - added support for actors and directors
 

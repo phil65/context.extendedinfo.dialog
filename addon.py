@@ -16,17 +16,23 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import xbmc
+import sys
 
 
 def main():
-    if xbmc.getCondVisibility("Container.Content(movies)"):
-        xbmc.executebuiltin("RunScript(script.extendedinfo,info=extendedinfo,dbid=%s,id=%s)" % (xbmc.getInfoLabel("ListItem.DBID"), xbmc.getInfoLabel("ListItem.Property(id)")))
-    elif xbmc.getCondVisibility("Container.Content(tvshows)"):
-        xbmc.executebuiltin("RunScript(script.extendedinfo,info=extendedtvinfo,dbid=%s,id=%s)" % (xbmc.getInfoLabel("ListItem.DBID"), xbmc.getInfoLabel("ListItem.Property(id)")))
-    elif xbmc.getCondVisibility("Container.Content(seasons)"):
-        xbmc.executebuiltin("RunScript(script.extendedinfo,info=seasoninfo,tvshow=%s,season=%s)" % (xbmc.getInfoLabel("ListItem.TVShowTitle"), xbmc.getInfoLabel("ListItem.Season")))
-    elif xbmc.getCondVisibility("Container.Content(actors) | Container.Content(directors)"):
-        xbmc.executebuiltin("RunScript(script.extendedinfo,info=extendedactorinfo,name=%s)" % (xbmc.getInfoLabel("ListItem.Label")))
+    info = sys.listitem.getVideoInfoTag()
+    dbid = info.getDbid()
+    db_type = info.getMediaType()
+    if not dbid:
+        dbid = sys.listitem.getProperty("dbid")
+    if db_type == "movie":
+        xbmc.executebuiltin("RunScript(script.extendedinfo,info=extendedinfo,dbid=%s,id=%s)" % (dbid, sys.listitem.getProperty("id")))
+    elif db_type == "tvshow":
+        xbmc.executebuiltin("RunScript(script.extendedinfo,info=extendedtvinfo,dbid=%s,id=%s)" % (dbid, sys.listitem.getProperty("id")))
+    elif db_type == "season":
+        xbmc.executebuiltin("RunScript(script.extendedinfo,info=seasoninfo,tvshow=%s,season=%s)" % (info.getTVShowTitle(), info.getSeason()))
+    elif db_type in ["actor", "director"]:
+        xbmc.executebuiltin("RunScript(script.extendedinfo,info=extendedactorinfo,name=%s)" % (sys.listitem.getLabel()))
 
 if __name__ == '__main__':
     main()
