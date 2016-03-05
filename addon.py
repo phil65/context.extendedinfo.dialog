@@ -21,7 +21,7 @@ import sys
 
 def main():
     info = sys.listitem.getVideoInfoTag()
-    dbid = info.getDbid()
+    dbid = info.getDbId()
     db_type = info.getMediaType()
     if not dbid:
         dbid = sys.listitem.getProperty("dbid")
