@@ -23,16 +23,17 @@ def main():
     info = sys.listitem.getVideoInfoTag()
     dbid = info.getDbId()
     db_type = info.getMediaType()
+    BASE = "RunScript(script.extendedinfo,info="
     if not dbid:
         dbid = sys.listitem.getProperty("dbid")
     if db_type == "movie":
-        xbmc.executebuiltin("RunScript(script.extendedinfo,info=extendedinfo,dbid=%s,id=%s)" % (dbid, sys.listitem.getProperty("id")))
+        xbmc.executebuiltin("%sextendedinfo,dbid=%s,id=%s,name=%s)" % (BASE, dbid, sys.listitem.getProperty("id"), info.getTitle()))
     elif db_type == "tvshow":
-        xbmc.executebuiltin("RunScript(script.extendedinfo,info=extendedtvinfo,dbid=%s,id=%s)" % (dbid, sys.listitem.getProperty("id")))
+        xbmc.executebuiltin("%sextendedtvinfo,dbid=%s,id=%s)" % (BASE, dbid, sys.listitem.getProperty("id")))
     elif db_type == "season":
-        xbmc.executebuiltin("RunScript(script.extendedinfo,info=seasoninfo,tvshow=%s,season=%s)" % (info.getTVShowTitle(), info.getSeason()))
+        xbmc.executebuiltin("%sseasoninfo,tvshow=%s,season=%s)" % (BASE, info.getTVShowTitle(), info.getSeason()))
     elif db_type in ["actor", "director"]:
-        xbmc.executebuiltin("RunScript(script.extendedinfo,info=extendedactorinfo,name=%s)" % (sys.listitem.getLabel()))
+        xbmc.executebuiltin("%sextendedactorinfo,name=%s)" % (BASE, sys.listitem.getLabel()))
 
 if __name__ == '__main__':
     main()

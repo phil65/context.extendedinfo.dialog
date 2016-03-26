@@ -1,3 +1,6 @@
+v1.0.2
+- try movie name when no ids provided
+
 v1.0.1
 - use sys.listitem for all info
 
