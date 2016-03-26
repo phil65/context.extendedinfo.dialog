@@ -23,14 +23,14 @@ def main():
     info = sys.listitem.getVideoInfoTag()
     dbid = info.getDbId()
     db_type = info.getMediaType()
-    movie_id = sys.listitem.getProperty("id")
+    remote_id = sys.listitem.getProperty("id")
     BASE = "RunScript(script.extendedinfo,info="
     if not dbid:
         dbid = sys.listitem.getProperty("dbid")
     if db_type == "movie":
-        xbmc.executebuiltin("%sextendedinfo,dbid=%s,id=%s,name=%s)" % (BASE, dbid, movie_id, info.getTitle()))
+        xbmc.executebuiltin("%sextendedinfo,dbid=%s,id=%s,name=%s)" % (BASE, dbid, remote_id, info.getTitle()))
     elif db_type == "tvshow":
-        xbmc.executebuiltin("%sextendedtvinfo,dbid=%s,id=%s)" % (BASE, dbid, movie_id))
+        xbmc.executebuiltin("%sextendedtvinfo,dbid=%s,id=%s)" % (BASE, dbid, remote_id))
     elif db_type == "season":
         xbmc.executebuiltin("%sseasoninfo,tvshow=%s,season=%s)" % (BASE, info.getTVShowTitle(), info.getSeason()))
     elif db_type in ["actor", "director"]:
