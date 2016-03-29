@@ -4,11 +4,13 @@
     <import addon="xbmc.python" version="2.25.0"/>
     <import addon="script.extendedinfo" version="4.5.0"/>
   </requires>
-  <extension point="kodi.context.item" library="addon.py">
-    <item>
-      <label>32000</label>
-      <visible>StringCompare(ListItem.dbtype,movie) | StringCompare(ListItem.dbtype,tvshow) | StringCompare(ListItem.dbtype,season) | StringCompare(ListItem.dbtype,actor) | StringCompare(ListItem.dbtype,director)</visible>
-    </item>
+  <extension point="kodi.context.item">
+    <menu id="kodi.core.main">
+      <item library="addon.py">
+        <label>32000</label>
+        <visible>StringCompare(ListItem.dbtype,movie) | StringCompare(ListItem.dbtype,tvshow) | StringCompare(ListItem.dbtype,season) | StringCompare(ListItem.dbtype,actor) | StringCompare(ListItem.dbtype,director)</visible>
+      </item>
+    </menu>
   </extension>
   <extension point="kodi.addon.metadata">
     <platform>all</platform>
@@ -16,6 +18,6 @@
     <description lang="en">Open ExtendedInfo dialog from context menu in library. Needs script.extendedinfo installed and activated. Available for movies, tv shows and seasons currently.</description>
     <license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
     <forum></forum>
-    <source></source>
+    <source>https://github.com/phil65/context.extendedinfo.dialog</source>
   </extension>
 </addon>
