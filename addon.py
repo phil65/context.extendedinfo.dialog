@@ -33,6 +33,12 @@ def main():
         xbmc.executebuiltin("%sextendedtvinfo,dbid=%s,id=%s)" % (BASE, dbid, remote_id))
     elif db_type == "season":
         xbmc.executebuiltin("%sseasoninfo,tvshow=%s,season=%s)" % (BASE, info.getTVShowTitle(), info.getSeason()))
+    elif db_type == "episode":
+        xbmc.executebuiltin("%sextendedepisodeinfo,tvshow=%s,season=%s,episode=%s,dbid=%s)".format(BASE,
+                                                                                                   info.getTVShowTitle(),
+                                                                                                   info.getSeason(),
+                                                                                                   info.getEpisode(),
+                                                                                                   dbid))
     elif db_type in ["actor", "director"]:
         xbmc.executebuiltin("%sextendedactorinfo,name=%s)" % (BASE, sys.listitem.getLabel()))
 
